@@ -47,3 +47,6 @@ sudo apt-get install ros-kinetic-kobuki
 sudo apt-get install ros-kinetic-navigation
 run catkin_make
 run catkin_make install
+
+
+rosrun map_server map_saver map:=/rtabmap/proj_map  --occ 1 --free 0.196 -f rtab
