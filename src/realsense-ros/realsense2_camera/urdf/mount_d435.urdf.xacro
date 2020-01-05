@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<robot name="origins">
+  
+  <link name="$(arg tf_prefix_camera1)_link"/>
+
+  
+  <origin xyz="0.009 0.021 0.027" rpy="0.000 -0.018 0.005"/>
+  
+</robot>
