@@ -42,8 +42,7 @@ Install
 cd to src
 run catkin_init_worspace
 run sudo apt-get install ros-kinetic-tf2-bullet
-run  sudo apt-get install ros-kinetic-rtabmap-ros
+run sudo apt-get install ros-kinetic-rtabmap-ros
 
 run catkin_make
-run catkin_make install 
-Ins
+run catkin_make install
