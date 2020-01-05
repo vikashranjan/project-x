@@ -37,3 +37,13 @@ roslaunch turtlebot_rviz_launchers view_navigation.launch --screen
 RTABMAp
 roslaunch rtab_nav rtab_nav.launch args:="--delete_db_on_start"
 rosrun map_server map_saver map:=/rtabmap/proj_map –f my_map_1
+
+Install
+cd to src
+run catkin_init_worspace
+run sudo apt-get install ros-kinetic-tf2-bullet
+run  sudo apt-get install ros-kinetic-rtabmap-ros
+
+run catkin_make
+run catkin_make install 
+Ins
