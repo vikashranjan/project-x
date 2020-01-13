@@ -25,12 +25,13 @@ https://github.com/IntelRealSense/librealsense/blob/master/third-party/libtm/lib
   <arg name="enable_accel"        default="true"/>
 
   <arg name="enable_sync"           default="false"/>
-
   <arg name="linear_accel_cov"      default="0.01"/>
   <arg name="initial_reset"         default="false"/>
-  <arg name="unite_imu_method"      default=""/>
 
-  <arg name="publish_odom_tf"     default="true"/>
+  <arg name="topic_odom_in"         default="/mobile_base/odom"/>
+  <arg name="calib_odom_file"       default="$(find realsense2_camera)/launch/includes/calib.json"/>
+  <arg name="unite_imu_method"      default="linear_interpolation"/>
+  <arg name="publish_odom_tf"       default="true"/>
   
   <group ns="$(arg camera)">
     <include file="$(find realsense2_camera)/launch/includes/nodelet.launch.xml">
@@ -39,7 +40,8 @@ https://github.com/IntelRealSense/librealsense/blob/master/third-party/libtm/lib
       <arg name="usb_port_id"              value="$(arg usb_port_id)"/>
       <arg name="device_type"              value="$(arg device_type)"/>
       <arg name="json_file_path"           value="$(arg json_file_path)"/>
-
+      <arg name="topic_odom_in"         value="$(arg topic_odom_in)"/>
+      <arg name="calib_odom_file"       value="$(arg calib_odom_file)"/>
       <arg name="enable_sync"              value="$(arg enable_sync)"/>
 
       <arg name="fisheye_width"            value="$(arg fisheye_width)"/>
@@ -59,5 +61,7 @@ https://github.com/IntelRealSense/librealsense/blob/master/third-party/libtm/lib
 
       <arg name="publish_odom_tf"          value="$(arg publish_odom_tf)"/>
     </include>
+    <node pkg="tf" type="static_transform_publisher" name="t265_static" args="0 0 0 0 0 0 base_link t265_odom_frame 100"/>
+    <node pkg="tf" type="static_transform_publisher" name="base_link_to_base_foot" args="0 0 0 0 0 0 base_footprint base_link 100"/>
   </group>
 </launch>
