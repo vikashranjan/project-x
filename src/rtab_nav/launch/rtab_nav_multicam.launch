@@ -1,31 +1,35 @@
 <launch>
-  <!-- 
-       Bringup Turtlebot:
-       $ roslaunch turtlebot_bringup minimal.launch
-       
-       Mapping:
-       $ roslaunch rtabmap_ros demo_turtlebot_mapping.launch
-       
-       Visualization:
-       $ roslaunch rtabmap_ros demo_turtlebot_rviz.launch
-       
-       This launch file is a one to one replacement of the gmapping_demo.launch in the 
-       "SLAM Map Building with TurtleBot" tutorial:
-       http://wiki.ros.org/turtlebot_navigation/Tutorials/indigo/Build%20a%20map%20with%20SLAM
-       
-       For localization-only after a mapping session, add argument "localization:=true" to
-       demo_turtlebot_mapping.launch line above. Move the robot around until it can relocalize in 
-       the previous map, then the 2D map should re-appear again. You can then follow the same steps 
-       from 3.3.2 of the "Autonomous Navigation of a Known Map with TurtleBot" tutorial:
-       http://wiki.ros.org/turtlebot_navigation/Tutorials/Autonomously%20navigate%20in%20a%20known%20map
- 
-       For turtlebot in simulation (Gazebo):
-         $ roslaunch turtlebot_gazebo turtlebot_world.launch
-         $ roslaunch rtabmap_ros demo_turtlebot_mapping.launch simulation:=true
-         $ roslaunch rtabmap_ros demo_turtlebot_rviz.launch
-  -->
-  
-  <arg name="database_path"     default="rtabmap.db"/>
+
+
+ <!-- Cameras -->
+  <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
+    <arg name="device_type"         default="d415"/>
+    <arg name="depth_registration" value="True" />
+    <arg name="camera" value="d415" />
+
+  </include>
+  <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
+    <arg name="depth_registration" value="True" />
+    <arg name="camera" value="d435" />
+     <arg name="device_type"         default="d435"/>
+  </include>
+
+  <include file="$(find realsense2_camera)/launch/rs_t265.launch">
+    <arg name="depth_registration" value="True" />
+    <arg name="camera" value="t265" />
+     <arg name="device_type"         default="t265"/>
+  </include>
+
+  <node pkg="tf" type="static_transform_publisher" name="base_to_d415_tf"
+      args="0.175 0.0 0.119 0.0 0.0 0.0 /base_link /camera1_link 100" />
+  <node pkg="tf" type="static_transform_publisher" name="base_to_camera2_tf"
+      args="-0.07 0.0 0.459 0.0 0.0 0.0 /base_link /camera2_link 100" />
+
+  <node pkg="tf" type="static_transform_publisher" name="t265_static" args="0 0 0 0 0 0 base_link t265_odom_frame 100"/>
+  <node pkg="tf" type="static_transform_publisher" name="base_link_to_base_foot" args="0 0 0 0 0 0 base_footprint base_link 100"/>
+
+
+  <arg name="database_path"     default="rtabmap-multi.db"/>
   <arg name="rgbd_odometry"     default="false"/>
   <arg name="rtabmapviz"        default="false"/>
   <arg name="localization"      default="false"/>

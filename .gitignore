@@ -4,3 +4,4 @@ build/
 devel/
 install/
 src/CMakeLists.txt
+.DS_Store
