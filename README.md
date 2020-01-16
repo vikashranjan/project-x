@@ -45,6 +45,7 @@ run sudo apt-get install ros-kinetic-tf2-bullet
 run sudo apt-get install ros-kinetic-rtabmap-ros
 sudo apt-get install ros-kinetic-kobuki
 sudo apt-get install ros-kinetic-navigation
+sudo apt-get install ros-kinetic-rgbd_launch
 run catkin_make
 run catkin_make install
 
