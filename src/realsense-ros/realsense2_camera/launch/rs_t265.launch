@@ -32,6 +32,9 @@ https://github.com/IntelRealSense/librealsense/blob/master/third-party/libtm/lib
   <arg name="calib_odom_file"       default="$(find realsense2_camera)/launch/includes/calib.json"/>
   <arg name="unite_imu_method"      default="linear_interpolation"/>
   <arg name="publish_odom_tf"       default="true"/>
+    <rosparam>
+      /camera/tracking_module/enable_pose_jumping: false
+  </rosparam>
   
   <group ns="$(arg camera)">
     <include file="$(find realsense2_camera)/launch/includes/nodelet.launch.xml">
