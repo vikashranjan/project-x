@@ -1,0 +1,11 @@
+index 1975c77..8412a5d 100644
+--- a/drivers/net/wireless/bcmdhd/wl_cfg80211.c
++++ b/drivers/net/wireless/bcmdhd/wl_cfg80211.c
+@@ -9938,6 +9938,7 @@
+ 	do {
+ 		bss = CFG80211_GET_BSS(wiphy, NULL, curbssid,
+ 			ssid->SSID, ssid->SSID_len);
++		cfg->wdev->ssid_len = ssid->SSID_len;
+ 		if (bss || (count > 5)) {
+ 			break;
+ 		}``
