@@ -49,5 +49,12 @@ sudo apt-get install ros-kinetic-rgbd_launch
 run catkin_make
 run catkin_make install
 
+# map 
+roslaunch turtlebot_bringup minimal.launch
+roslaunch rtab_nav rtab_nav_multicam.launch
 
-rosrun map_server map_saver map:=/rtabmap/proj_map  --occ 1 --free 0.196 -f rtab
+# explore
+sudo apt install ros-${ROS_DISTRO}-multirobot-map-merge ros-${ROS_DISTRO}-explore-lite
+roslaunch explore explore_costmap.launch
+
+
