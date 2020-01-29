@@ -18,9 +18,10 @@
   </include>
 
   <node pkg="tf" type="static_transform_publisher" name="base_to_d415_tf"
-      args="0.175 0.0 0.119 0.0 0.0 0.0 base_link d415_link 100" />
+      args="0.06 0.095 0.47 0.7853982 0.0 0.0 base_link d415_link 100" />
+
   <node pkg="tf" type="static_transform_publisher" name="base_to_d435_tf"
-      args="-0.125 0.0 0.459 0.0 0.0 0.0 base_link d435_link 100" />
+      args="-0.06 0.095 0.47 -0.7853982 0.0 0.0 base_link d435_link 100" />
 
   <node pkg="tf" type="static_transform_publisher" name="t265_static" args="0 0 0 0 0 0 base_link t265_odom_frame 100"/>
   <node pkg="tf" type="static_transform_publisher" name="base_link_to_base_foot" args="0 0 0 0 0 0 base_footprint base_link 100"/>
