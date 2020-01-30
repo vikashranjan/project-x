@@ -1,0 +1,21 @@
+<launch>
+
+ <!-- Cameras -->
+  <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
+    <arg name="device_type"         default="d415"/>
+    <arg name="camera" value="d415" />
+  </include>
+
+  <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
+    <arg name="camera" value="d435" />
+     <arg name="device_type"         default="d435"/>
+  </include>
+
+
+  <node pkg="tf" type="static_transform_publisher" name="base_to_d415_tf"
+      args="-0.06 0.095 0.47 -0.29 0.0 0.0 base_link d415_link 100" />
+
+  <node pkg="tf" type="static_transform_publisher" name="base_to_d435_tf"
+      args="0.06 0.095 0.47 0.47 0.0 0.0 base_link d435_link 100" />
+
+</launch>
