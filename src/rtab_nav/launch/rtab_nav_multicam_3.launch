@@ -8,12 +8,12 @@
 
  <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
     <arg name="camera" value="d435_1" />
-     <arg name="serial_no"         default="826212070362"/>
+     <arg name="serial_no"         default="801212070782"/>
   </include>
 
   <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
     <arg name="camera" value="d435_2" />
-     <arg name="serial_no"         default="801212070782"/>
+     <arg name="serial_no"         default="826212070362"/>
   </include>
 
 
@@ -24,22 +24,16 @@
   </include>
 
   <node pkg="tf" type="static_transform_publisher" name="base_to_d415_tf"
-      args="-0.08 -0.245 0.38 -0.349 0.0 0.0 d435_2_link d415_link 100" />
+      args="-0.08 -0.245 0.38 -0.872 0.0 0.0 d435_1_link d415_link 100" />
 
   <node pkg="tf" type="static_transform_publisher" name="base_to_d435_1_tf"
-      args="0.16 0.0 0.0 0.942 0.0 0.0 d415_link d435_1_link 100" />
+      args="0 0.145 0.18 0.0 0.0 0.0 base_link d435_1_link 100" />
 
   <node pkg="tf" type="static_transform_publisher" name="base_to_d435_2_tf"
-      args="0 0.145 0.18 0.0 0.0 0.0 base_link d435_2_link 100" />
-
-
-_link 100" />
-
+      args="0.08 -0.245 0.38 0.872 0.0 0.0 d435_1_link d435_2_link 100" />
 
   <node pkg="tf" type="static_transform_publisher" name="t265_static" args="0 0 0 0 0 0 base_link t265_odom_frame 100"/>
   <node pkg="tf" type="static_transform_publisher" name="base_link_to_base_foot" args="0 0 0 0 0 0 base_footprint base_link 100"/>
-
-
   
   <arg name="database_path"     default="rtabmap.db"/>
   <arg name="rgbd_odometry"     default="false"/>
