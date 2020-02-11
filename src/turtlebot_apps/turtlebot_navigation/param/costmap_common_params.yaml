@@ -36,14 +36,14 @@ obstacle_layer:
     marking: true
     clearing: false
     min_obstacle_height: 0.1
-    max_obstacle_height: 1.0
+    max_obstacle_height: .8
   d453_2:
     data_type: PointCloud2
     topic: d435_2/depth_registered/points
     marking: true
     clearing: false
     min_obstacle_height: 0.1
-    max_obstacle_height: 1.0
+    max_obstacle_height: .8
   # for debugging only, let's you see the entire voxel grid
 
 #cost_scaling_factor and inflation_radius were now moved to the inflation_layer ns
