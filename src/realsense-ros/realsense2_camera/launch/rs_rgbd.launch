@@ -56,12 +56,12 @@ Processing enabled by this node:
   <arg name="fisheye_height"      default="480"/>
   <arg name="enable_fisheye"      default="true"/>
 
-  <arg name="depth_width"         default="848"/>
-  <arg name="depth_height"        default="480"/>
+  <arg name="depth_width"         default="1280"/>
+  <arg name="depth_height"        default="720"/>
   <arg name="enable_depth"        default="true"/>
 
-  <arg name="infra_width"         default="640"/>
-  <arg name="infra_height"        default="480"/>
+  <arg name="infra_width"         default="1280"/>
+  <arg name="infra_height"        default="720"/>
   <arg name="enable_infra1"       default="true"/>
   <arg name="enable_infra2"       default="true"/>
 
