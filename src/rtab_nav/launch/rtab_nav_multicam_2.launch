@@ -70,6 +70,16 @@
       <remap from="rgb/camera_info" to="color/camera_info"/>
       <param name="approx"          value="false"/>
     </node>
+
+      <node pkg="nodelet" type="nodelet" name="obstacles_detection" args="load rtabmap_ros/obstacles_detection stereo_nodelet">
+         <remap from="cloud" to="depth_registered/points"/>
+         <remap from="obstacles" to="/planner_cloud"/>
+
+         <param name="frame_id" type="string" value="base_footprint"/>
+         <param name="map_frame_id" type="string" value="map"/>
+         <param name="min_cluster_size" type="int" value="20"/>
+         <param name="max_obstacles_height" type="double" value="0.0"/>
+       </node>
   </group>
 
   <group ns="d435_2">
@@ -80,6 +90,15 @@
       <remap from="rgb/camera_info" to="color/camera_info"/>
       <param name="approx"          value="false"/>
     </node>
+      <node pkg="nodelet" type="nodelet" name="obstacles_detection" args="load rtabmap_ros/obstacles_detection stereo_nodelet">
+         <remap from="cloud" to="depth_registered/points"/>
+         <remap from="obstacles" to="/planner_cloud"/>
+
+         <param name="frame_id" type="string" value="base_footprint"/>
+         <param name="map_frame_id" type="string" value="map"/>
+         <param name="min_cluster_size" type="int" value="20"/>
+         <param name="max_obstacles_height" type="double" value="0.0"/>
+       </node>
   </group>
 
 
