@@ -22,28 +22,22 @@ obstacle_layer:
   z_resolution: 0.2
   z_voxels: 3 #2
   publish_voxel_map: false
-  observation_sources:  bump  d435_1 d453_2
+  observation_sources: bump c_obs
   bump:
     data_type: PointCloud2
     topic: mobile_base/sensors/bumper_pointcloud
     marking: true
     clearing: false
-    min_obstacle_height: 0.01
+    min_obstacle_height: 0.00
     max_obstacle_height: 0.15
-  d453_1:
+  c_obs:
     data_type: PointCloud2
-    topic: d435_1/depth_registered/points
+    topic: rtabmap/cloud_obstacles
     marking: true
     clearing: true
-    min_obstacle_height: 0.03
+    min_obstacle_height: 0.0
     max_obstacle_height: .6
-  d453_2:
-    data_type: PointCloud2
-    topic: d435_2/depth_registered/points
-    marking: true
-    clearing: true
-    min_obstacle_height: 0.03
-    max_obstacle_height: .6
+
   # for debugging only, let's you see the entire voxel grid
 
 #cost_scaling_factor and inflation_radius were now moved to the inflation_layer ns
