@@ -18,12 +18,11 @@
      <arg name="device_type"         default="t265"/>
   </include>
 
- <node pkg="tf" type="static_transform_publisher" name="base_to_d435_1_tf"
-      args="0.14 0.01 0.19 0.0 0.0 -0.0523 base_link d435_1_link 100" />
+<node pkg="tf" type="static_transform_publisher" name="base_to_d435_1_tf"
+      args="0.14 0.01 0.20 0.0 0.0 0.0 base_link d435_1_link 100" />
 
   <node pkg="tf" type="static_transform_publisher" name="base_to_d435_2_tf"
-      args="0.08 0.0 0.555 0.0 0.0 0.0 base_link d435_2_link 100" />
-
+      args="0.08 0.0 0.53.5 0.0 0.0 0.0 base_link d435_2_link 100" />
 
   <node pkg="tf" type="static_transform_publisher" name="t265_static" args="0 0 0 0 0 0 base_link t265_odom_frame 100"/>
   <node pkg="tf" type="static_transform_publisher" name="base_link_to_base_foot" args="0 0 0 0 0 0 base_footprint base_link 100"/>
