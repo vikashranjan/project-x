@@ -12,20 +12,13 @@
      <arg name="serial_no"         default="916512061256"/>
   </include>
 
-  <include file="$(find realsense2_camera)/launch/rs_t265.launch">
-
-    <arg name="camera" value="t265" />
-     <arg name="device_type"         default="t265"/>
-  </include>
 
 <node pkg="tf" type="static_transform_publisher" name="base_to_d435_1_tf"
-      args="0.14 0.01 0.19 0.0 0.0 0.0 base_link d435_1_link 100" />
+      args="0.16 0.0 0.09 0.0 0.0 0.0 base_link d435_1_link 100" />
 
   <node pkg="tf" type="static_transform_publisher" name="base_to_d435_2_tf"
       args="0.08 0.0 0.535 0.0 0.0 0.0 base_link d435_2_link 100" />
 
-  <node pkg="tf" type="static_transform_publisher" name="t265_static" args="0 0 0 0 0 0 base_link t265_odom_frame 100"/>
-  <node pkg="tf" type="static_transform_publisher" name="base_link_to_base_foot" args="0 0 0 0 0 0 base_footprint base_link 100"/>
   
   <arg name="database_path"     default="rtabmap.db"/>
   <arg name="rgbd_odometry"     default="false"/>
@@ -40,7 +33,7 @@
   <arg unless="$(arg simulation)" name="rgb_topic"   default="/d435/color/image_raw"/>
   <arg     if="$(arg simulation)" name="depth_topic" default="/camera/depth/image_raw"/>
   <arg unless="$(arg simulation)" name="depth_topic" default="/d435/aligned_depth_to_color/image_raw"/>
-  <arg name="odom_topic"         value="/t265/odom/sample"/>
+  <arg name="odom_topic"         value="/mobile_base/odom"/>
 
   <arg name="camera_info_topic" default="/d435/color/camera_info"/>
 
