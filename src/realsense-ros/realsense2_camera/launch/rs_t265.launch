@@ -63,6 +63,10 @@ https://github.com/IntelRealSense/librealsense/blob/master/third-party/libtm/lib
       <arg name="unite_imu_method"         value="$(arg unite_imu_method)"/>
 
       <arg name="publish_odom_tf"          value="$(arg publish_odom_tf)"/>
+      <arg name="enable_mapping"         value="true"/>
+      <arg name="enable_relocalization"         value="true"/>
+      <arg name="enable_pose_jumping"         value="false"/>
+      
     </include>
  
   </group>
