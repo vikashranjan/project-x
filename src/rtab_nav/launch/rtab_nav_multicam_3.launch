@@ -1,39 +1,34 @@
 <launch>
 
  <!-- Cameras -->
-  <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
-    <arg name="device_type"         default="d415"/>
-    <arg name="camera" value="d415" />
-  </include>
+ 
 
- <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
-    <arg name="camera" value="d435_1" />
-     <arg name="serial_no"         default="801212070782"/>
-  </include>
 
   <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
     <arg name="camera" value="d435_2" />
-     <arg name="serial_no"         default="826212070362"/>
+     <arg name="serial_no"         default="916512061256"/>
   </include>
 
 
-  <include file="$(find realsense2_camera)/launch/rs_t265.launch">
-
-    <arg name="camera" value="t265" />
-     <arg name="device_type"         default="t265"/>
+  <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
+    <arg name="camera" value="d435_3" />
+     <arg name="serial_no"         default="916512061282"/>
   </include>
 
-  <node pkg="tf" type="static_transform_publisher" name="base_to_d415_tf"
-      args="-0.08 -0.245 0.38 -0.872 0.0 0.0 d435_1_link d415_link 100" />
+  <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
+    <arg name="camera" value="d435_4" />
+     <arg name="serial_no"         default="806312060532"/>
+  </include>
 
-  <node pkg="tf" type="static_transform_publisher" name="base_to_d435_1_tf"
-      args="0 0.145 0.18 0.0 0.0 0.0 base_link d435_1_link 100" />
 
   <node pkg="tf" type="static_transform_publisher" name="base_to_d435_2_tf"
-      args="0.08 -0.245 0.38 0.872 0.0 0.0 d435_1_link d435_2_link 100" />
+      args="0.08 0.0 0.535 0.0 0.0 0.0 base_link d435_2_link 100" />
 
-  <node pkg="tf" type="static_transform_publisher" name="t265_static" args="0 0 0 0 0 0 base_link t265_odom_frame 100"/>
-  <node pkg="tf" type="static_transform_publisher" name="base_link_to_base_foot" args="0 0 0 0 0 0 base_footprint base_link 100"/>
+  <node pkg="tf" type="static_transform_publisher" name="base_to_d435_3_tf"
+      args="0.10 0.06 0.47 -0.872 0.0 0.0 base_link d435_3_link 100" />
+
+  <node pkg="tf" type="static_transform_publisher" name="base_to_d435_4_tf"
+      args="0.10 -0.06 0.47 0.872 0.0 0.0 base_link d435_4_link 100" />
   
   <arg name="database_path"     default="rtabmap.db"/>
   <arg name="rgbd_odometry"     default="false"/>
@@ -48,7 +43,7 @@
   <arg unless="$(arg simulation)" name="rgb_topic"   default="/d435/color/image_raw"/>
   <arg     if="$(arg simulation)" name="depth_topic" default="/camera/depth/image_raw"/>
   <arg unless="$(arg simulation)" name="depth_topic" default="/d435/aligned_depth_to_color/image_raw"/>
-  <arg name="odom_topic"         value="/t265/odom/sample"/>
+  <arg name="odom_topic"         value="/mobile_base/odom"/>
 
   <arg name="camera_info_topic" default="/d435/color/camera_info"/>
 
@@ -67,25 +62,8 @@
   <include file="$(find turtlebot_navigation)/launch/includes/move_base.launch.xml"/>
 
  <!-- sync rgb/depth images per camera -->
-  <group ns="d415">
-    <node pkg="nodelet" type="nodelet" name="nodelet_manager1" args="manager"/>
-    <node pkg="nodelet" type="nodelet" name="rgbd_sync1" args="load rtabmap_ros/rgbd_sync nodelet_manager1">
-      <remap from="rgb/image"       to="color/image_rect_color"/>
-      <remap from="depth/image"     to="aligned_depth_to_color/image_raw"/>
-      <remap from="rgb/camera_info" to="color/camera_info"/>
-      <param name="approx"          value="false"/>
-    </node>
-  </group>
 
-  <group ns="d435_1">
-    <node pkg="nodelet" type="nodelet" name="nodelet_manager2" args="manager"/>
-    <node pkg="nodelet" type="nodelet" name="rgbd_sync2" args="load rtabmap_ros/rgbd_sync nodelet_manager2">
-      <remap from="rgb/image"       to="color/image_rect_color"/>
-      <remap from="depth/image"     to="aligned_depth_to_color/image_raw"/>
-      <remap from="rgb/camera_info" to="color/camera_info"/>
-      <param name="approx"          value="false"/>
-    </node>
-  </group>
+
 
   <group ns="d435_2">
     <node pkg="nodelet" type="nodelet" name="nodelet_manager3" args="manager"/>
@@ -95,8 +73,30 @@
       <remap from="rgb/camera_info" to="color/camera_info"/>
       <param name="approx"          value="false"/>
     </node>
+     
   </group>
 
+  <group ns="d435_3">
+    <node pkg="nodelet" type="nodelet" name="nodelet_manager3" args="manager"/>
+    <node pkg="nodelet" type="nodelet" name="rgbd_sync3" args="load rtabmap_ros/rgbd_sync nodelet_manager3">
+      <remap from="rgb/image"       to="color/image_rect_color"/>
+      <remap from="depth/image"     to="aligned_depth_to_color/image_raw"/>
+      <remap from="rgb/camera_info" to="color/camera_info"/>
+      <param name="approx"          value="false"/>
+    </node>
+     
+  </group>
+
+  <group ns="d435_4">
+    <node pkg="nodelet" type="nodelet" name="nodelet_manager3" args="manager"/>
+    <node pkg="nodelet" type="nodelet" name="rgbd_sync3" args="load rtabmap_ros/rgbd_sync nodelet_manager3">
+      <remap from="rgb/image"       to="color/image_rect_color"/>
+      <remap from="depth/image"     to="aligned_depth_to_color/image_raw"/>
+      <remap from="rgb/camera_info" to="color/camera_info"/>
+      <param name="approx"          value="false"/>
+    </node>
+     
+  </group>
 
   <!-- Mapping -->
   <group ns="rtabmap">
@@ -119,10 +119,10 @@
           <remap from="move_base"            to="/move_base"/>
 	
 	  <!-- inputs -->
-	  <remap from="scan"            to="/scan"/>
-	  <remap from="rgbd_image0"      to="/d415/rgbd_image"/>
-  	  <remap from="rgbd_image1"     to="/d435_1/rgbd_image"/>
-	  <remap from="rgbd_image2"     to="/d435_2/rgbd_image"/>
+  	
+	  <remap from="rgbd_image0"     to="/d435_2/rgbd_image"/>
+	  <remap from="rgbd_image1"     to="/d435_3/rgbd_image"/>
+	  <remap from="rgbd_image2"     to="/d435_4/rgbd_image"/>
 	  <remap from="odom" to="$(arg odom_topic)"/>
       <param name="Grid/FromDepth"     type="string" value="false"/>
       <param name="Vis/EstimationType" type="string" value="0"/> <!-- should be 0 for multi-cameras -->

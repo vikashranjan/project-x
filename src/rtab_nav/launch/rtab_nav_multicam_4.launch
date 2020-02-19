@@ -2,9 +2,10 @@
 
  <!-- Cameras -->
  
+
  <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
     <arg name="camera" value="d435_1" />
-     <arg name="serial_no"         default="806312060532"/>
+     <arg name="serial_no"         default="826212070362"/>
   </include>
 
   <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
@@ -20,11 +21,11 @@
 
   <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
     <arg name="camera" value="d435_4" />
-     <arg name="serial_no"         default="826212070362"/>
+     <arg name="serial_no"         default="806312060532"/>
   </include>
 
 <node pkg="tf" type="static_transform_publisher" name="base_to_d435_1_tf"
-      args="0.16 0.0 0.09 0.0 0.0 0.0 base_link d435_1_link 100" />
+      args="0.115 0.0 0.165 0.0 0.0 0.0 base_link d435_1_link 100" />
 
   <node pkg="tf" type="static_transform_publisher" name="base_to_d435_2_tf"
       args="0.08 0.0 0.535 0.0 0.0 0.0 base_link d435_2_link 100" />
