@@ -19,12 +19,12 @@
 
 
   <node pkg="tf" type="static_transform_publisher" name="base_to_d435_2_tf"
-      args="0.08 0.0 0.555 0.0 0.0 0.0 base_link d435_2_link 100" />
+      args="0.03 -0.025 0.54 -0.698 0 1.57  base_link d435_2_link 100" />
 
   <node pkg="tf" type="static_transform_publisher" name="base_to_d435_3_tf"
-      args="0.10 0.06 0.482 -0.872 0.0 0.0 base_link d435_3_link 100" />
+      args="0.035 0.0 0.54 0.0 0 1.57  base_link d435_3_link 100" />
 
   <node pkg="tf" type="static_transform_publisher" name="base_to_d435_4_tf"
-      args="0.10 -0.06 0.492 0.872 0.0 0.0 base_link d435_4_link 100" />
+      args="0.03 0.025 0.54 0.698 0 1.57  base_link d435_4_link 100" />
 
 </launch>
