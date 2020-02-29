@@ -23,17 +23,17 @@
      <arg name="serial_no"         default="806312060532"/>
   </include>
 
- <node pkg="tf" type="static_transform_publisher" name="base_to_d435_1_tf"
-      args="-0.07 -0.025 0.54 -0.698 0.087 1.57  base_link d435_1_link 100" />
+<node pkg="tf" type="static_transform_publisher" name="base_to_d435_1_tf"
+      args="-0.07 -0.025 0.54 -0.698 0.122 1.57  base_link d435_1_link 100" />
 
   <node pkg="tf" type="static_transform_publisher" name="base_to_d435_2_tf"
-      args="-0.065 0.0 0.54 0.0 0.087 1.57  base_link d435_2_link 100" />
+      args="-0.065 0.0 0.54 0.0 0.122 1.57  base_link d435_2_link 100" />
 
   <node pkg="tf" type="static_transform_publisher" name="base_to_d435_3_tf"
-      args="-0.07 0.025 0.54 0.698 0.087  1.57  base_link d435_3_link 100" />
+      args="-0.07 0.025 0.54 0.698 0.122  1.57  base_link d435_3_link 100" />
 
 <node pkg="tf" type="static_transform_publisher" name="base_to_d435_4_tf"
-      args="0.15 -0.01 0.185 0.052 0 0  base_link d435_4_link 100" />
+      args="0.15 -0.01 0.185 0.052 0 0.017  base_link d435_4_link 100" />
 
   
   <arg name="database_path"     default="rtabmap.db"/>
