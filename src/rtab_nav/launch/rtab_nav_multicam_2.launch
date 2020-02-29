@@ -1,23 +1,26 @@
 <launch>
 
- <!-- Cameras -->
- 
- <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
-    <arg name="camera" value="d435_1" />
-     <arg name="serial_no"         default="806312060532"/>
-  </include>
 
+ <!-- Cameras -->
   <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
     <arg name="camera" value="d435_2" />
      <arg name="serial_no"         default="916512061256"/>
   </include>
 
 
-<node pkg="tf" type="static_transform_publisher" name="base_to_d435_1_tf"
-      args="0.16 0.0 0.09 0.0 0.0 0.0 base_link d435_1_link 100" />
+  <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
+    <arg name="camera" value="d435_3" />
+     <arg name="serial_no"         default="916512061282"/>
+  </include>
 
-  <node pkg="tf" type="static_transform_publisher" name="base_to_d435_2_tf"
-      args="0.08 0.0 0.535 0.0 0.0 0.0 base_link d435_2_link 100" />
+
+
+ <node pkg="tf" type="static_transform_publisher" name="base_to_d435_2_tf"
+      args="-0.06 -0.02 0.54 -0.349 0 1.57  base_link d435_2_link 100" />
+
+  <node pkg="tf" type="static_transform_publisher" name="base_to_d435_3_tf"
+      args="-0.06 0.02 0.54 0.349 0 1.57  base_link d435_3_link 100" />
+
 
   
   <arg name="database_path"     default="rtabmap.db"/>
@@ -35,7 +38,7 @@
   <arg unless="$(arg simulation)" name="depth_topic" default="/d435/aligned_depth_to_color/image_raw"/>
   <arg name="odom_topic"         value="/mobile_base/odom"/>
 
-  <arg name="camera_info_topic" default="/d435/color/camera_info"/>
+
 
   
   <arg name="wait_for_transform"  default="0.2"/> 
@@ -54,28 +57,31 @@
  <!-- sync rgb/depth images per camera -->
 
 
-  <group ns="d435_1">
+
+  <group ns="d435_2">
     <node pkg="nodelet" type="nodelet" name="nodelet_manager2" args="manager"/>
     <node pkg="nodelet" type="nodelet" name="rgbd_sync2" args="load rtabmap_ros/rgbd_sync nodelet_manager2">
       <remap from="rgb/image"       to="color/image_rect_color"/>
       <remap from="depth/image"     to="aligned_depth_to_color/image_raw"/>
       <remap from="rgb/camera_info" to="color/camera_info"/>
       <param name="approx"          value="false"/>
+<param name="queue_size"          value="20"/>
     </node>
-
      
   </group>
 
-  <group ns="d435_2">
+  <group ns="d435_3">
     <node pkg="nodelet" type="nodelet" name="nodelet_manager3" args="manager"/>
     <node pkg="nodelet" type="nodelet" name="rgbd_sync3" args="load rtabmap_ros/rgbd_sync nodelet_manager3">
       <remap from="rgb/image"       to="color/image_rect_color"/>
       <remap from="depth/image"     to="aligned_depth_to_color/image_raw"/>
       <remap from="rgb/camera_info" to="color/camera_info"/>
       <param name="approx"          value="false"/>
+      <param name="queue_size"          value="20"/>
     </node>
      
   </group>
+
 
 
   <!-- Mapping -->
@@ -87,22 +93,25 @@
 	  <param name="wait_for_transform_duration"  type="double"   value="$(arg wait_for_transform)"/>
 
           <param name="subscribe_rgbd"     type="bool"   value="true"/>
-	  <param name="subscribe_depth"     type="bool"   value="false"/>
+	  <param name="subscribe_depth"     type="bool"   value="true"/>
  	  <param name="subscribe_rgb"      type="bool"   value="false"/>
 	  <param name="subscribe_scan"      type="bool"   value="false"/>
 	  <param name="map_always_update" type="bool" value="false"/>
  	  <param name="map_negative_scan_empty_ray_tracing" type="bool" value="false"/>
 	<param name="rgbd_cameras"     type="int"    value="2"/>
-	<param name="gen_scan"         type="bool"   value="true"/>
+	<param name="gen_scan"         type="bool"   value="false"/>
           <!-- When sending goals on /rtabmap/goal topic, use actionlib to communicate with move_base --> 
 	  <param name="use_action_for_goal" type="bool" value="true"/>
           <remap from="move_base"            to="/move_base"/>
 	
 	  <!-- inputs -->
-  	  <remap from="rgbd_image0"     to="/d435_1/rgbd_image"/>
-	  <remap from="rgbd_image1"     to="/d435_2/rgbd_image"/>
+  	
+	  <remap from="rgbd_image0"     to="/d435_2/rgbd_image"/>
+	  <remap from="rgbd_image1"     to="/d435_3/rgbd_image"/>
+	  <remap from="scan" to="/camera/scan"/> 
+ 	 
 	  <remap from="odom" to="$(arg odom_topic)"/>
-      <param name="Grid/FromDepth"     type="string" value="false"/>
+      <param name="Grid/FromDepth"     type="string" value="true"/>
       <param name="Vis/EstimationType" type="string" value="0"/> <!-- should be 0 for multi-cameras -->
       <param name="Vis/CorGuessWinSize"       type="string" value="0"/> <!-- should be 0 for multi-cameras -->
 
@@ -129,6 +138,10 @@
 	  <param name="Mem/RehearsalSimilarity"      type="string" value="0.30"/>
 	  <param name="Reg/Force3DoF"                type="string" value="true"/>
 	  <param name="GridGlobal/MinSize"           type="string" value="20"/>
+	  <param name="cloud_noise_filtering_radius" value="0.05"/>
+	  <param name="cloud_noise_filtering_min_neighbors" value="2"/>
+
+          <param name="Optimizer/Slam2D" value="true" />
 
 	  
 	  <!-- localization mode -->
