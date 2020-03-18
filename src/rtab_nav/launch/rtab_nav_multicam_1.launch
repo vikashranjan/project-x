@@ -2,10 +2,6 @@
 
 
  <!-- Cameras -->
-  <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
-    <arg name="camera" value="d435_2" />
-     <arg name="serial_no"         default="916512061256"/>
-  </include>
 
 
   <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
@@ -13,21 +9,14 @@
      <arg name="serial_no"         default="916512061282"/>
   </include>
 
-  <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
-    <arg name="camera" value="d435_4" />
-     <arg name="serial_no"         default="806312060532"/>
-  </include>
 
 
 
- <node pkg="tf" type="static_transform_publisher" name="base_to_d435_2_tf"
-      args="-0.07 -0.025 0.54 -0.698 0 1.57  base_link d435_2_link 100" />
 
   <node pkg="tf" type="static_transform_publisher" name="base_to_d435_3_tf"
       args="-0.065 0.0 0.54 0.0 0 1.57  base_link d435_3_link 100" />
 
-  <node pkg="tf" type="static_transform_publisher" name="base_to_d435_4_tf"
-      args="-0.07 0.025 0.54 0.698 0 1.57  base_link d435_4_link 100" />
+
   
   <arg name="database_path"     default="rtabmap.db"/>
   <arg name="rgbd_odometry"     default="false"/>
@@ -44,7 +33,7 @@
   <arg unless="$(arg simulation)" name="depth_topic" default="/d435/aligned_depth_to_color/image_raw"/>
   <arg name="odom_topic"         value="/mobile_base/odom"/>
 
-  <arg name="camera_info_topic" default="/d435_3/color/camera_info"/>
+
 
   
   <arg name="wait_for_transform"  default="0.2"/> 
@@ -64,22 +53,12 @@
 
 
 
-  <group ns="d435_2">
-    <node pkg="nodelet" type="nodelet" name="nodelet_manager3" args="manager"/>
-    <node pkg="nodelet" type="nodelet" name="rgbd_sync3" args="load rtabmap_ros/rgbd_sync nodelet_manager3">
-      <remap from="rgb/image"       to="color/image_raw"/>
-      <remap from="depth/image"     to="aligned_depth_to_color/image_raw"/>
-      <remap from="rgb/camera_info" to="color/camera_info"/>
-      <param name="approx"          value="false"/>
-<param name="queue_size"          value="20"/>
-    </node>
-     
-  </group>
+
 
   <group ns="d435_3">
     <node pkg="nodelet" type="nodelet" name="nodelet_manager3" args="manager"/>
     <node pkg="nodelet" type="nodelet" name="rgbd_sync3" args="load rtabmap_ros/rgbd_sync nodelet_manager3">
-      <remap from="rgb/image"       to="color/image_raw"/>
+      <remap from="rgb/image"       to="color/image_rect_color"/>
       <remap from="depth/image"     to="aligned_depth_to_color/image_raw"/>
       <remap from="rgb/camera_info" to="color/camera_info"/>
       <param name="approx"          value="false"/>
@@ -88,17 +67,7 @@
      
   </group>
 
-  <group ns="d435_4">
-    <node pkg="nodelet" type="nodelet" name="nodelet_manager3" args="manager"/>
-    <node pkg="nodelet" type="nodelet" name="rgbd_sync3" args="load rtabmap_ros/rgbd_sync nodelet_manager3">
-      <remap from="rgb/image"       to="color/image_raw"/>
-      <remap from="depth/image"     to="aligned_depth_to_color/image_raw"/>
-      <remap from="rgb/camera_info" to="color/camera_info"/>
-      <param name="approx"          value="false"/>
-<param name="queue_size"          value="20"/>
-    </node>
-     
-  </group>
+
 
   <!-- Mapping -->
   <group ns="rtabmap">
@@ -114,7 +83,7 @@
 	  <param name="subscribe_scan"      type="bool"   value="false"/>
 	  <param name="map_always_update" type="bool" value="false"/>
  	  <param name="map_negative_scan_empty_ray_tracing" type="bool" value="false"/>
-	<param name="rgbd_cameras"     type="int"    value="3"/>
+	<param name="rgbd_cameras"     type="int"    value="1"/>
 	<param name="gen_scan"         type="bool"   value="true"/>
           <!-- When sending goals on /rtabmap/goal topic, use actionlib to communicate with move_base --> 
 	  <param name="use_action_for_goal" type="bool" value="true"/>
@@ -122,9 +91,9 @@
 	
 	  <!-- inputs -->
   	
-	  <remap from="rgbd_image0"     to="/d435_2/rgbd_image"/>
-	  <remap from="rgbd_image1"     to="/d435_3/rgbd_image"/>
-	  <remap from="rgbd_image2"     to="/d435_4/rgbd_image"/>
+	
+	  <remap from="rgbd_image0"     to="/d435_3/rgbd_image"/>
+	
  	 
 	  <remap from="odom" to="$(arg odom_topic)"/>
       <param name="Grid/FromDepth"     type="string" value="false"/>

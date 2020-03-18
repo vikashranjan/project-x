@@ -4,11 +4,11 @@
 
   <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
     <arg name="camera" value="d435" />
-     <arg name="serial_no"         default="916512061282"/>
+     <arg name="serial_no"         default="851112061066"/>
   </include>
 
   <node pkg="tf" type="static_transform_publisher" name="base_to_d435_3_tf"
-      args="-0.065 0.0 0.54 0.0 0 1.57  base_link d435_link 100" />
+      args="-0.065 0.0 0.54 -1.0472 0.0 1.57  base_link d435_link 100" />
  
   
   <arg name="database_path"     default="rtabmap.db"/>
