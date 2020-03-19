@@ -108,7 +108,6 @@
 	  <param name="database_path"       type="string" value="$(arg database_path)"/>
 	  <param name="frame_id"            type="string" value="base_footprint"/>
 	  <param name="wait_for_transform_duration"  type="double"   value="$(arg wait_for_transform)"/>
-           <param name="grid_size" type="double" value="50"/>
            <param name="cloud_noise_filtering_radius" value="0.05"/>
            <param name="cloud_noise_filtering_min_neighbors" value="2"/>
           <param name="subscribe_rgbd"     type="bool"   value="true"/>
