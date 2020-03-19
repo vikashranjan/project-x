@@ -19,7 +19,7 @@ obstacle_layer:
   z_resolution: 0.1
   z_voxels: 4 #2
   publish_voxel_map: false
-  observation_sources: bump c_obs
+  observation_sources: bump local_g_obs
   bump:
     data_type: PointCloud2
     topic: mobile_base/sensors/bumper_pointcloud
@@ -27,27 +27,14 @@ obstacle_layer:
     clearing: false
     min_obstacle_height: 0.00
     max_obstacle_height: 0.15
-  d435_2:
+  local_g_obs:
     data_type: PointCloud2
-    topic: /d435_2/depth_registered/points
+    topic: /rtabmap/local_grid_obstacle
     marking: true
     clearing: true
     min_obstacle_height: 0.0
     max_obstacle_height: .6
-  d435_3:
-    data_type: PointCloud2
-    topic: /d435_3/depth_registered/points
-    marking: true
-    clearing: true
-    min_obstacle_height: 0.0
-    max_obstacle_height: .6
-  d435_4:
-    data_type: PointCloud2
-    topic: /d435_4/depth_registered/points
-    marking: true
-    clearing: true
-    min_obstacle_height: 0.0
-    max_obstacle_height: .6
+  
 
   # for debugging only, let's you see the entire voxel grid
 
