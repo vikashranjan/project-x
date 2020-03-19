@@ -2,7 +2,7 @@
 
 
  <!-- Cameras -->
-  <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
+ <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
     <arg name="camera" value="d435_4" />
      <arg name="serial_no"         default="916512061256"/>
   </include>
@@ -22,14 +22,13 @@
 
 
  <node pkg="tf" type="static_transform_publisher" name="base_to_d435_2_tf"
-      args="0.13 -0.025 0.32 -0.698 0 1.57  base_link d435_2_link 100" />
+      args="0.17 -0.025 0.18 -0.698 0 1.57  base_link d435_2_link 100" />
 
   <node pkg="tf" type="static_transform_publisher" name="base_to_d435_3_tf"
-      args="0.14 0.0 0.32 0.0 0 1.57  base_link d435_3_link 100" />
+      args="0.18 0.0 0.18 0.0 0 1.57  base_link d435_3_link 100" />
 
   <node pkg="tf" type="static_transform_publisher" name="base_to_d435_4_tf"
-      args="0.13 0.025 0.32 0.698 0 1.57  base_link d435_4_link 100" />
-
+      args="0.17 0.025 0.18 0.698 0 1.57  base_link d435_4_link 100" />
   
   <arg name="database_path"     default="rtabmap.db"/>
   <arg name="rgbd_odometry"     default="false"/>
