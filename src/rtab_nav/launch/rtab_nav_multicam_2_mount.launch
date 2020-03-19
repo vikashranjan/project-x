@@ -138,7 +138,7 @@
 	  <param name="GridGlobal/MinSize"           type="string" value="20"/>
 	  <param name="cloud_noise_filtering_radius" value="0.05"/>
 	  <param name="cloud_noise_filtering_min_neighbors" value="2"/>
-	  <param name="Rtabmap/DetectionRate"        type="string" value="5"/>
+	  <param name="Rtabmap/DetectionRate"        type="string" value="1"/>
 	  <param  name="RGBD/SavedLocalizationIgnored" type="string" value="true"/>
 
           <param name="Optimizer/Slam2D" value="true" />
@@ -151,7 +151,7 @@
 	  <param name="Mem/InitWMWithAllNodes" type="string" value="$(arg localization)"/> 
     </node>
 
-	<node pkg="rotate_revovery" name="rotate" type="rotate.py" output="screen" />
+	<node if="$(arg localization)" pkg="rotate_revovery" name="rotate" type="rotate.py" output="screen" />
    
     <!-- Odometry : ONLY for testing without the actual robot! /odom TF should not be already published. -->
     <node if="$(arg rgbd_odometry)" pkg="rtabmap_ros" type="rgbd_odometry" name="rgbd_odometry" output="screen">
