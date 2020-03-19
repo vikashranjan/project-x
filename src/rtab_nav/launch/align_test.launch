@@ -1,34 +1,26 @@
 <launch>
 
  <!-- Cameras -->
-
  <!-- Cameras -->
- <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
-    <arg name="camera" value="d435_4" />
+  <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
+    <arg name="camera" value="d435_2" />
      <arg name="serial_no"         default="916512061282"/>
-  </include>
-
- <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
-    <arg name="camera" value="d435_3" />
-     <arg name="serial_no"         default="851112061066"/>
   </include>
 
 
   <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
-    <arg name="camera" value="d435_2" />
+    <arg name="camera" value="d435_3" />
      <arg name="serial_no"         default="916512061256"/>
   </include>
 
- 
+
 
 
  <node pkg="tf" type="static_transform_publisher" name="base_to_d435_2_tf"
-      args="0.135 -0.025 0.24 -0.698 0 1.57  base_link d435_2_link 100" />
+      args="0.135 -0.035 0.25 -0.349 0 0  base_link d435_3_link 100" />
 
-  <node pkg="tf" type="static_transform_publisher" name="base_to_d435_3_tf"
-      args="0.145 0.0 0.24 0.0 0 1.57  base_link d435_3_link 100" />
 
   <node pkg="tf" type="static_transform_publisher" name="base_to_d435_4_tf"
-      args="0.135 0.025 0.24 0.698 0 1.57  base_link d435_4_link 100" />
+      args="0.135 0.035 0.205 0.349 0 0  base_link d435_2_link 100" />
 
 </launch>
