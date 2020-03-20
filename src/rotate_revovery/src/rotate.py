@@ -12,7 +12,7 @@ def rotate():
     velocity_publisher = rospy.Publisher('/cmd_vel_mux/input/navi', Twist, queue_size=10)
     vel_msg = Twist()
 
-    speed = 20
+    speed = 10
     angle = 360
     clockwise = True
 
