@@ -1,0 +1,3 @@
+<launch>
+<node pkg="rotate_revovery" name="rotate.py" type="rotate.py" output="screen" />
+</launch>
