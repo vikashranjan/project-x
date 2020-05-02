@@ -50,9 +50,9 @@ def rotate():
 
 if __name__ == '__main__':
     ROT = 0
-    while ROT < MAX_ROT:
+    while ROT < MAX_ROT and not rospy.is_shutdown():
         try:
-            rospy.wait_for_message("/map", OccupancyGrid, 10)
+            rospy.wait_for_message("/map", OccupancyGrid, 20)
             print("Exiting startup recovery")
             break
         except:
