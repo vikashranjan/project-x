@@ -13,11 +13,11 @@
 
 
  <node pkg="tf" type="static_transform_publisher" name="base_to_d435_3_tf"
-      args="0.035 -0.065 0.155 -0.349 0 0  base_link d435_3_link 100" />
+      args="0.14 0.065 0.125 0.349 0 0  base_link d435_3_link 100" />
 
 
   <node pkg="tf" type="static_transform_publisher" name="base_to_d435_2_tf"
-      args="0.035 0.065 0.155 0.349 0 0  base_link d435_2_link 100" />
+      args="0.14 -0.065 0.125 -0.349 0 0  base_link d435_2_link 100" />
 
 <node pkg="tf" type="static_transform_publisher" name="base_link_to_base_foot" args="0 0 0 0 0 0 base_footprint base_link 100"/>
   
