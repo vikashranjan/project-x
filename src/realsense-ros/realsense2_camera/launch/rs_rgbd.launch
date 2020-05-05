@@ -51,7 +51,8 @@ Processing enabled by this node:
   <arg name="usb_port_id"         default=""/>
   <arg name="device_type"         default=""/>
   <!--arg name="json_file_path"      default="$(find realsense2_camera)/launch/includes/HighResHighAccuracyPreset.json"/-->
-  <arg name="json_file_path"      default=""/>
+  <arg name="json_file_path"      default="$(find realsense2_camera)/launch/includes/HighResHighDensityPreset.json"/>
+  <!--arg name="json_file_path"      default=""/-->
 
 
   <arg name="fisheye_width"       default="1280"/>
