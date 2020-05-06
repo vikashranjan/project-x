@@ -24,14 +24,14 @@
   </node>
 
   <node pkg="tf" type="static_transform_publisher" name="base_link_to_laser4"
-    args="0.0325 0.0 0.3675 0.0 0.0  0.0 /base_footprint /laser_frame 40" />
+    args="0.0325 0.0 0.15 0.0 0.0  0.0 /base_footprint /laser_frame 40" />
 
  <node pkg="tf" type="static_transform_publisher" name="base_to_d435_3_tf"
-      args="0.14 0.065 0.125 0.349 0 0  base_link d435_3_link 100" />
+      args="0.11 0.065 0.415 0.349 0 0  base_link d435_3_link 100" />
 
 
   <node pkg="tf" type="static_transform_publisher" name="base_to_d435_2_tf"
-      args="0.14 -0.065 0.125 -0.349 0 0  base_link d435_2_link 100" />
+      args="0.11 -0.065 0.415 -0.349 0 0  base_link d435_2_link 100" />
 
 <node pkg="tf" type="static_transform_publisher" name="base_link_to_base_foot" args="0 0 0 0 0 0 base_footprint base_link 100"/>
   
@@ -102,11 +102,11 @@
 
    
     <node name="rtabmap" pkg="rtabmap_ros" type="rtabmap" output="screen" args="$(arg args)">
-	  <param name="database_path"       type="string" value="$(arg database_path)"/>
-	  <param name="wait_for_transform_duration"  type="double"   value="$(arg wait_for_transform)"/>
-	  <param name="map_always_update" type="bool" value="false"/>
- <param name="map_negative_poses_ignored" type="bool"   value="false"/>   
-<param name="Grid/FromDepth"     type="string" value="false"/>
+      <param name="database_path"       type="string" value="$(arg database_path)"/>
+      <param name="wait_for_transform_duration"  type="double"   value="$(arg wait_for_transform)"/>
+      <param name="map_always_update" type="bool" value="false"/>
+      <param name="map_negative_poses_ignored" type="bool"   value="false"/>   
+      <param name="Grid/FromDepth"     type="string" value="false"/>
 
       <param name="subscribe_depth"  type="bool"   value="false"/>
       <param name="subscribe_rgbd"   type="bool"   value="true"/>
