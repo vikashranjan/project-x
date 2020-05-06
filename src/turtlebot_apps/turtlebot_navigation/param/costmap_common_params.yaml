@@ -19,7 +19,7 @@ obstacle_layer:
   z_resolution: 0.1
   z_voxels: 4 #2
   publish_voxel_map: false
-  observation_sources: bump local_g_obs scan
+  observation_sources: bump d435_2 d435_3 scan
   bump:
     data_type: PointCloud2
     topic: mobile_base/sensors/bumper_pointcloud
@@ -27,9 +27,17 @@ obstacle_layer:
     clearing: false
     min_obstacle_height: 0.00
     max_obstacle_height: 0.15
-  local_g_obs:
+  d435_2:
     data_type: PointCloud2
-    topic: /rtabmap/local_grid_obstacle
+    topic: /d435_2/planner_cloud
+    sensor_frame: base_footprint
+    marking: true
+    clearing: true
+    min_obstacle_height: 0.02
+    max_obstacle_height: .4
+  d435_3:
+    data_type: PointCloud2
+    topic: /d435_3/planner_cloud
     sensor_frame: base_footprint
     marking: true
     clearing: true
