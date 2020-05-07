@@ -29,7 +29,7 @@ obstacle_layer:
     max_obstacle_height: 0.15
   d435_3:
     data_type: PointCloud2
-    topic: /d435_3/planner_cloud
+    topic: /d435_3/depth_registered/points
     sensor_frame: base_footprint
     marking: true
     clearing: true
