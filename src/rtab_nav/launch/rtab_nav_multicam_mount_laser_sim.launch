@@ -1,0 +1,133 @@
+<launch>
+
+
+  <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
+    <arg name="camera" value="d435_3" />
+     <arg name="serial_no"         default="806312060532"/>
+  </include>
+
+  <node name="ydlidar_node"  pkg="ydlidar"  type="ydlidar_node" output="screen" respawn="false" >
+    <param name="port"         type="string" value="/dev/ttyUSB1"/>  
+    <param name="frame_id"     type="string" value="laser_frame"/>
+    <param name="resolution_fixed"    type="bool"   value="true"/>
+    <param name="auto_reconnect"    type="bool"   value="true"/>
+    <param name="angle_min"    type="double" value="-180" />
+    <param name="angle_max"    type="double" value="180" />
+    <param name="range_min"    type="double" value="0.18" />
+    <param name="range_max"    type="double" value="10.0" />
+    <param name="ignore_array" type="string" value="" />
+  </node>
+
+  <node pkg="tf" type="static_transform_publisher" name="base_link_to_laser4"
+    args="0.0325 0.0 0.15 0.0 0.0  0.0 /base_footprint /laser_frame 40" />
+
+ <node pkg="tf" type="static_transform_publisher" name="base_to_d435_3_tf"
+      args="0.105 0 0.415 0 0 0  base_link d435_3_link 100" />
+
+
+<node pkg="tf" type="static_transform_publisher" name="base_link_to_base_foot" args="0 0 0 0 0 0 base_footprint base_link 100"/>
+  
+  <arg name="database_path"     default="rtabmap.db"/>
+  <arg name="rgbd_odometry"     default="false"/>
+  <arg name="rtabmapviz"        default="false"/>
+  <arg name="localization"      default="false"/>
+  <arg name="simulation"        default="false"/>
+  <arg name="sw_registered"     default="false"/>
+  <arg     if="$(arg localization)" name="args"  default=""/>
+  <arg unless="$(arg localization)" name="args"  default="--delete_db_on_start"/>
+
+  <arg     if="$(arg simulation)" name="rgb_topic"   default="/camera/rgb/image_raw"/>
+  <arg unless="$(arg simulation)" name="rgb_topic"   default="/d435/color/image_raw"/>
+  <arg     if="$(arg simulation)" name="depth_topic" default="/camera/depth/image_raw"/>
+  <arg unless="$(arg simulation)" name="depth_topic" default="/d435/aligned_depth_to_color/image_raw"/>
+  <arg name="odom_topic"         value="/mobile_base/odom"/>
+
+<remap from="grid_map" to="/map"/>
+
+  
+  <arg name="wait_for_transform"  default="0.2"/> 
+  <!-- 
+      robot_state_publisher's publishing frequency in "turtlebot_bringup/launch/includes/robot.launch.xml" 
+      can be increase from 5 to 10 Hz to avoid some TF warnings.
+  -->
+  
+  <!-- Navigation stuff (move_base) -->
+  <!--include unless="$(arg simulation)" file="$(find turtlebot_bringup)/launch/3dsensor.launch">
+     <arg     if="$(arg sw_registered)" name="depth_registration" value="false"/>
+     <arg unless="$(arg sw_registered)" name="depth_registration" value="true"/>
+  </include-->
+  <include file="$(find turtlebot_navigation)/launch/includes/move_base.launch.xml"/>
+
+ <!-- sync rgb/depth images per camera -->
+
+  <group ns="d435_3">
+    <node pkg="nodelet" type="nodelet" name="nodelet_manager3" args="manager"/>
+    <node pkg="nodelet" type="nodelet" name="rgbd_sync3" args="load rtabmap_ros/rgbd_sync nodelet_manager3">
+      <remap from="rgb/image"       to="color/image_rect_color"/>
+      <remap from="depth/image"     to="aligned_depth_to_color/image_raw"/>
+      <remap from="rgb/camera_info" to="color/camera_info"/>
+      <param name="approx"          value="false"/>
+      <param name="queue_size"          value="30"/>
+    </node>
+     
+  </group>
+
+
+  <!-- Mapping -->
+  <group ns="rtabmap">   
+    <node name="rtabmap" pkg="rtabmap_ros" type="rtabmap" output="screen" args="$(arg args)">
+      <param name="database_path"       type="string" value="$(arg database_path)"/>
+      <param name="wait_for_transform_duration"  type="double"   value="$(arg wait_for_transform)"/>
+      <param name="map_always_update" type="bool" value="false"/>
+      <param name="map_negative_poses_ignored" type="bool"   value="false"/>   
+      <param name="Grid/FromDepth"     type="string" value="false"/>
+
+      <param name="queue_size"          value="30"/>
+      <param name="subscribe_depth"  type="bool"   value="false"/>
+      <param name="subscribe_rgbd"   type="bool"   value="true"/>
+
+      <param name="frame_id"         type="string" value="base_footprint"/>
+      <param name="gen_scan"         type="bool"   value="false"/>
+      <param name="wait_for_transform" type="double"   value="$(arg wait_for_transform)"/>
+      <param name="map_negative_poses_ignored" type="bool"   value="false"/>        <!-- refresh grid map even if we are not moving-->
+      <param name="subscribe_scan" type="bool" value="true"/>
+      <param name="RGBD/OptimizeFromGraphEnd"    type="string" value="false"/>
+      <param name="RGBD/ProximityPathMaxNeighbors" type="string" value="0"/>
+      <param  name="RGBD/SavedLocalizationIgnored" type="string" value="true"/>
+
+      <remap from="rgbd_image" to="/d435_3/rgbd_image"/>
+      
+      <remap from="scan" to="/scan"/>
+      <remap from="odom" to="$(arg odom_topic)"/>
+      <param name="Reg/Strategy"                 type="string" value="2"/>
+      <param name="Grid/FromDepth"     type="string" value="false"/>
+      <param name="Vis/MinInliers"     type="string" value="20"/>
+      <param name="Vis/InlierDistance" type="string" value="0.02"/>
+      <param name="Reg/Force3DoF"                type="string" value="true"/>
+      <param name="RGBD/AngularUpdate"           type="string" value="0.1"/>    <!-- Update map only if the robot is moving -->
+      <param name="RGBD/LinearUpdate"            type="string" value="0.1"/>    <!-- Update map only if the robot is moving -->
+      <param     if="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="false"/>
+      <param unless="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="true"/>
+      <param name="Mem/InitWMWithAllNodes" type="string" value="$(arg localization)"/> 
+
+      <param name="cloud_noise_filtering_radius" value="0.05"/>
+      <param name="cloud_noise_filtering_min_neighbors" value="2"/>
+      <param name="Rtabmap/DetectionRate"        type="string" value="3"/>
+      <param name="Optimizer/Slam2D" value="true" />
+    </node>
+ 
+    <node if="$(arg localization)" pkg="rotate_revovery" name="rotate" type="rotate.py" output="screen" />
+
+
+   <node pkg="nodelet" type="nodelet" name="obstacles_detection_3" args="standalone rtabmap_ros/obstacles_detection">
+      <remap from="cloud" to="/d435_3/depth_registered/points"/>
+      <remap from="obstacles" to="/d435_3/planner_cloud"/>
+      <param name="frame_id" type="string" value="base_footprint"/>
+      <param name="map_frame_id" type="string" value="map"/>
+      <param name="queue_size"          value="30"/>
+      <param name="min_cluster_size" type="int" value="40"/>
+</node>
+  </group>
+
+
+</launch>
