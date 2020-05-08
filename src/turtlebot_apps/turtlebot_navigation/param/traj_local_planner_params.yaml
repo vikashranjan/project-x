@@ -1,4 +1,4 @@
-DWAPlannerROS:
+TrajectoryPlannerROS:
 
 # Robot Configuration Parameters - Kobuki
   max_vel_x: 0.20  # 0.55

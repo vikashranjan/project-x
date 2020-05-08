@@ -30,7 +30,6 @@ obstacle_layer:
   d435_2:
     data_type: PointCloud2
     topic: /d435_2/depth_registered/points
-    sensor_frame: base_footprint
     marking: true
     clearing: true
     min_obstacle_height: 0.04
@@ -39,7 +38,6 @@ obstacle_layer:
   d435_3:
     data_type: PointCloud2
     topic: /d435_3/depth_registered/points
-    sensor_frame: base_footprint
     marking: true
     clearing: true
     min_obstacle_height: 0.04
@@ -48,9 +46,9 @@ obstacle_layer:
   scan:
     data_type: LaserScan
     topic: /scan
-    sensor_frame: base_footprint
     marking: true
     clearing: true
+    inf_is_valid: true # This parameter does the trick!
     expected_update_rate: 0.4
     min_obstacle_height: 0.02
     max_obstacle_height: .5

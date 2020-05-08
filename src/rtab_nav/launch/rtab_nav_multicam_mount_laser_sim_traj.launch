@@ -68,7 +68,7 @@
      <arg     if="$(arg sw_registered)" name="depth_registration" value="false"/>
      <arg unless="$(arg sw_registered)" name="depth_registration" value="true"/>
   </include-->
-  <include file="$(find turtlebot_navigation)/launch/includes/move_base.launch.xml"/>
+  <include file="$(find turtlebot_navigation)/launch/includes/move_base.launch.traj.xml"/>
 
  <!-- sync rgb/depth images per camera -->
 
