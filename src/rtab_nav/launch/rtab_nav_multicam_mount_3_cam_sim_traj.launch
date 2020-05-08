@@ -141,7 +141,7 @@
 	  <param name="cloud_noise_filtering_min_neighbors" value="2"/>
 
           <param name="Optimizer/Slam2D" value="true" />
-
+          <param name="proj_max_ground_angle" value="60"/>
 	  
 	  <!-- localization mode -->
 	  <param     if="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="false"/>
