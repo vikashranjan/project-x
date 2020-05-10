@@ -10,17 +10,29 @@
   <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
     <arg name="camera" value="d435_4" />
      <arg name="serial_no"         default="916512061282"/>
+  <arg name="depth_width"         default="640"/>
+  <arg name="depth_height"        default="480"/>
+  <arg name="enable_depth"        default="true"/>
+
+  <arg name="infra_width"         default="640"/>
+  <arg name="infra_height"        default="480"/>
+  <arg name="enable_infra1"       default="true"/>
+  <arg name="enable_infra2"       default="true"/>
+
+  <arg name="color_width"         default="640"/>
+  <arg name="color_height"        default="480"/>
+
   </include>
 
    <node name="ydlidar_node"  pkg="ydlidar"  type="ydlidar_node" output="screen" respawn="false" >
-    <param name="port"         type="string" value="/dev/ttyUSB1"/>  
+    <param name="port"         type="string" value="/dev/ttyUSB0"/>  
     <param name="frame_id"     type="string" value="laser_frame"/>
     <param name="resolution_fixed"    type="bool"   value="true"/>
     <param name="auto_reconnect"    type="bool"   value="true"/>
     <param name="angle_min"    type="double" value="-180" />
     <param name="angle_max"    type="double" value="180" />
     <param name="range_min"    type="double" value="0.18" />
-    <param name="range_max"    type="double" value="4.0" />
+    <param name="range_max"    type="double" value="10.0" />
     <param name="ignore_array" type="string" value="" />
   </node>
 
@@ -31,8 +43,8 @@
       args="0.12 0 0.44 0 0 0  base_link d435_2_link 100" />
 
 
- <node pkg="tf" type="static_transform_publisher" name="base_to_d435_3_tf"
-      args="0.12 0 0.40 0 1.0472 0  base_link d435_3_link 100" />
+ <node pkg="tf" type="static_transform_publisher" name="base_to_d435_4_tf"
+      args="0.12 0 0.40 0 1.0472 0  base_link d435_4_link 100" />
 
 
 <node pkg="tf" type="static_transform_publisher" name="base_link_to_base_foot" args="0 0 0 0 0 0 base_footprint base_link 100"/>
