@@ -1,0 +1,44 @@
+<launch>
+ 
+ <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
+    <arg name="camera" value="d435_2" />
+     <arg name="serial_no"         default="916512061282"/>
+  </include>
+
+
+  <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
+    <arg name="camera" value="d435_3" />
+     <arg name="serial_no"         default="916512061256"/>
+  </include>
+
+
+  <node pkg="tf" type="static_transform_publisher" name="base_to_d435_3_tf"
+      args="0.135 -0.065 0.15 -0.349 0 0  base_link d435_3_link 100" />
+
+
+  <node pkg="tf" type="static_transform_publisher" name="base_to_d435_2_tf"
+      args="0.135 0.065 0.15 0.349 0 0  base_link d435_2_link 100" />
+
+  <node pkg="tf" type="static_transform_publisher" name="base_link_to_base_foot" args="0 0 0 0 0 0 base_footprint base_link 100"/>
+
+
+  <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan_1">
+    <remap from="camera_info" to="/d435_3/aligned_depth_to_color/camera_info" />
+    <remap from="image" to="/d435_3/aligned_depth_to_color/image_raw" />
+    <remap from="scan" to="/d435_3/scan" />
+    <param name="output_frame_id" value="base_link" />
+    <param name="scan_height" value="1" />
+    <param name="range_max" value="4" />
+  </node>
+
+  <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan_2">
+    <remap from="camera_info" to="/d435_2/aligned_depth_to_color/camera_info" />
+    <remap from="image" to="/d435_2/aligned_depth_to_color/image_raw" />
+    <remap from="scan" to="/d435_2/scan" />
+    <param name="output_frame_id" value="base_link" />
+    <param name="scan_height" value="1" />
+    <param name="range_max" value="4" />
+  </node>
+
+</launch>
+

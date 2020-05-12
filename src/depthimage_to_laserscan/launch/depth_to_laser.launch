@@ -1,0 +1,19 @@
+<launch>
+  
+  <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan_1">
+    <remap from="camera_info" to="/d435_3/aligned_depth_to_color/camera_info" />
+    <remap from="image" to="/d435_3/aligned_depth_to_color/image_raw" />
+    <remap from="scan" to="/d435_3/scan" />
+    <param name="output_frame_id" value="base_link" />
+    <param name="scan_height" value="1" />
+    <param name="range_max" value="4" />
+  </node>
+  <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan_2">
+    <remap from="camera_info" to="/d435_2/aligned_depth_to_color/camera_info" />
+    <remap from="image" to="/d435_2/aligned_depth_to_color/image_raw" />
+    <remap from="scan" to="/d435_2/scan" />
+    <param name="output_frame_id" value="base_link" />
+    <param name="scan_height" value="1" />
+    <param name="range_max" value="4" />
+  </node>
+</launch>
