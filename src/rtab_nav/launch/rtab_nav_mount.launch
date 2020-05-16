@@ -85,6 +85,16 @@
   </group>
 
 
+  <group ns="d435_4">
+    <node pkg="nodelet" type="nodelet" name="nodelet_manager4" args="manager"/>
+    <node pkg="nodelet" type="nodelet" name="rgbd_sync4" args="load rtabmap_ros/rgbd_sync nodelet_manager4">
+      <remap from="rgb/image"       to="color/image_raw"/>
+      <remap from="rgb/camera_info" to="color/camera_info"/>
+      <remap from="depth/image"     to="aligned_depth_to_color/image_raw"/>
+      <remap from="depth/camera_info" to="depth/camera_info"/>
+      <param name="approx"          value="false"/>
+    </node>
+  </group>
   <!-- Mapping -->
   <group ns="rtabmap">
 
@@ -180,16 +190,14 @@
 
  <!-- Create point cloud for the local planner -->
 
-    <node pkg="nodelet" type="nodelet" name="obstacles_detection" args="load rtabmap_ros/obstacles_detection stereo_nodelet">
-         <remap from="cloud" to="/d435_4/depth_registered/points"/>
-         <remap from="obstacles" to="/d435_4/planner_cloud"/>
-
-         <param name="frame_id" type="string" value="base_footprint"/>
-         <param name="map_frame_id" type="string" value="map"/>
-         <param name="min_cluster_size" type="int" value="20"/>
-         <param name="min_obstacles_height" type="double" value="0.05"/>
-	 <param name="max_obstacles_height" type="double" value="0.20"/>
-       </node>
-    
+      <node pkg="nodelet" type="nodelet" name="obstacles_detection_4" args="standalone rtabmap_ros/obstacles_detection">
+      <remap from="cloud" to="/d435_4/depth_registered/points"/>
+      <remap from="obstacles" to="/d435_4/planner_cloud"/>
+      <param name="frame_id" type="string" value="base_link"/>
+      <param name="map_frame_id" type="string" value="map"/>
+      <param name="queue_size"          value="30"/>
+      <param name="min_cluster_size" type="int" value="20"/>
+</node>
+ 
   </group>
 </launch>
