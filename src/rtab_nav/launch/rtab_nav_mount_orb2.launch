@@ -24,7 +24,8 @@
 
 
 <node pkg="tf" type="static_transform_publisher" name="base_link_to_base_foot" args="0 0 0 0 0 0 base_footprint base_link 100"/>
-  
+ 
+<include file="$(find turtlebot_navigation)/launch/includes/move_base.launch.xml"/> 
  
  <node name="orb_slam2_rgbd" pkg="orb_slam2_ros"
       type="orb_slam2_ros_rgbd" output="screen">
