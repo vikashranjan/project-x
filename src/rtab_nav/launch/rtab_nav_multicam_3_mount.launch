@@ -207,6 +207,14 @@
       <remap from="rgb/camera_info" to="$(arg camera_info_topic)"/>
       <remap from="scan"            to="/scan"/>
     </node>
-    
+   <node pkg="nodelet" type="nodelet" name="obstacles_detection" args="standalone rtabmap_ros/obstacles_detection">
+      <remap from="cloud" to="/d435_4/depth_registered/points"/>
+      <remap from="obstacles" to="/d435_4/planner_cloud"/>
+      <param name="frame_id" type="string" value="base_footprint"/>
+      <param name="map_frame_id" type="string" value="map"/>
+       <param name="queue_size"          value="30"/>
+      <param name="min_cluster_size" type="int" value="20"/>
+     
+  </node>
   </group>
 </launch>
