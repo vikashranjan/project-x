@@ -19,7 +19,7 @@ obstacle_layer:
   z_resolution: 0.1
   z_voxels: 4 #2
   publish_voxel_map: false
-  observation_sources: scan d435_4 bump 
+  observation_sources: scan  bump 
   bump:
     data_type: PointCloud2
     topic: mobile_base/sensors/bumper_pointcloud
@@ -52,7 +52,7 @@ obstacle_layer:
 inflation_layer:
   enabled:              true
   cost_scaling_factor:  5.0  # exponential rate at which the obstacle cost drops off (default: 10)
-  inflation_radius:     0.10  # max. distance from an obstacle at which costs are incurred for planning paths.
+  inflation_radius:     0.05  # max. distance from an obstacle at which costs are incurred for planning paths.
 
 static_layer:
   enabled:              true
