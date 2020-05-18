@@ -1,13 +1,13 @@
 <launch>
 
  <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
-    <arg name="camera" value="d435_2" />
+    <arg name="camera" value="d435_3" />
      <arg name="serial_no"         default="916512061256"/>
   </include>
 
 
   <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
-    <arg name="camera" value="d435_3" />
+    <arg name="camera" value="d435_2" />
      <arg name="serial_no"         default="806312060532"/>
   </include>
 
