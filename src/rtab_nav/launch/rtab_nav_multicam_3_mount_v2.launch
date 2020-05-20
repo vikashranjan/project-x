@@ -2,7 +2,7 @@
 
   <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
     <arg name="camera" value="d435_2" />
-     <arg name="serial_no"         default="916512061282"/>
+     <arg name="serial_no"         default="806312060532"/>
   </include>
 
  <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
@@ -31,14 +31,17 @@
   <node pkg="tf" type="static_transform_publisher" name="base_link_to_laser4"
     args="0.0325 0.0 0.15 0.0 0.0  0.0 /base_footprint /laser_frame 40" />
 
- <node pkg="tf" type="static_transform_publisher" name="base_to_d435_2_tf"
-      args="0.105 0 0.55 0 -0.7 0  base_link d435_2_link 20" />
+
+  <node pkg="tf" type="static_transform_publisher" name="base_to_d435_2_tf"
+      args="0.105 0 0.55 0 -0.87 0  base_link d435_2_link 20" />
 
  <node pkg="tf" type="static_transform_publisher" name="base_to_d435_3_tf"
       args="0.12 0 0.51 0 0 0  base_link d435_3_link 20" />
 
+
  <node pkg="tf" type="static_transform_publisher" name="base_to_d435_4_tf"
       args="0.13 0 0.48 0 1.0472 0  base_link d435_4_link 20" />
+
 
  <node pkg="tf" type="static_transform_publisher" name="base_link_to_base_foot" args="0 0 0 0 0 0 base_footprint base_link 100"/>
   
