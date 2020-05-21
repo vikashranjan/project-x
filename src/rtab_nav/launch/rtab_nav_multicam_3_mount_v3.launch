@@ -14,41 +14,10 @@
   <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
     <arg name="camera" value="d435_4" />
      <arg name="serial_no"         default="916512061256"/>
-  <arg name="fisheye_width"       default="640"/>
-  <arg name="fisheye_height"      default="480"/>
-  <arg name="enable_fisheye"      default="true"/>
-
-  <arg name="depth_width"         default="640"/>
-  <arg name="depth_height"        default="480"/>
-  <arg name="enable_depth"        default="true"/>
-
-  <arg name="infra_width"         default="640"/>
-  <arg name="infra_height"        default="480"/>
-  <arg name="enable_infra1"       default="true"/>
-  <arg name="enable_infra2"       default="true"/>
-
-  <arg name="color_width"         default="640"/>
-  <arg name="color_height"        default="480"/>
-  <arg name="enable_color"        default="true"/>
-
-  <arg name="fisheye_fps"         default="30"/>
-  <arg name="depth_fps"           default="30"/>
-  <arg name="infra_fps"           default="30"/>
-  <arg name="color_fps"           default="30"/>
-  <arg name="gyro_fps"            default="400"/>
-  <arg name="accel_fps"           default="250"/>
-  <arg name="enable_gyro"         default="true"/>
-  <arg name="enable_accel"        default="true"/>
-
-  <arg name="enable_pointcloud"   default="false"/>
-  <arg name="enable_sync"         default="true"/>
-  <arg name="align_depth"         default="true"/>
-  <arg name="filters"             default="spatial,temporal"/>
-
   </include>
 
    <node name="ydlidar_node"  pkg="ydlidar"  type="ydlidar_node" output="screen" respawn="false" >
-    <param name="port"         type="string" value="/dev/ttyUSB0"/>  
+    <param name="port"         type="string" value="/dev/ttyUSB1"/>  
     <param name="frame_id"     type="string" value="laser_frame"/>
     <param name="resolution_fixed"    type="bool"   value="true"/>
     <param name="auto_reconnect"    type="bool"   value="true"/>
@@ -226,15 +195,14 @@
     </node>
 
 
-   <!--node pkg="nodelet" type="nodelet" name="obstacles_detection" args="standalone rtabmap_ros/obstacles_detection">
+   <node pkg="nodelet" type="nodelet" name="obstacles_detection" args="standalone rtabmap_ros/obstacles_detection">
       <remap from="cloud" to="/d435_4/depth_registered/points"/>
       <remap from="obstacles" to="/d435_4/planner_cloud"/>
       <param name="frame_id" type="string" value="base_footprint"/>
       <param name="map_frame_id" type="string" value="map"/>
-       <param name="queue_size"          value="30"/>
-      <param name="min_cluster_size" type="int" value="10"/>
-     
-  </node-->
+      <param name="queue_size"          value="30"/>
+      <param name="min_cluster_size" type="int" value="30"/>
+  </node>
 
  
   </group>
