@@ -17,7 +17,7 @@
   </include>
 
    <node name="ydlidar_node"  pkg="ydlidar"  type="ydlidar_node" output="screen" respawn="false" >
-    <param name="port"         type="string" value="/dev/ttyUSB1"/>  
+    <param name="port"         type="string" value="/dev/ttyUSB0"/>  
     <param name="frame_id"     type="string" value="laser_frame"/>
     <param name="resolution_fixed"    type="bool"   value="true"/>
     <param name="auto_reconnect"    type="bool"   value="true"/>
@@ -105,20 +105,6 @@
      
   </group>
 
-  <group ns="d435_4">
-    <node pkg="nodelet" type="nodelet" name="nodelet_manager4" args="manager"/>
-    <node pkg="nodelet" type="nodelet" name="rgbd_sync4" args="load rtabmap_ros/rgbd_sync nodelet_manager4">
-      <remap from="rgb/image"       to="color/image_rect_color"/>
-      <remap from="depth/image"     to="aligned_depth_to_color/image_raw"/>
-      <remap from="rgb/camera_info" to="color/camera_info"/>
-      <remap from="depth/camera_info" to="depth/camera_info"/>
-      <param name="approx"          value="true"/>
-     
-    </node>
-     
-  </group>
-
-
   <!-- Mapping -->
   <group ns="rtabmap">
 
@@ -135,7 +121,7 @@
 
 	  <param name="map_always_update" type="bool" value="false"/>
 
-	  <param name="rgbd_cameras"     type="int"    value="3"/>
+	  <param name="rgbd_cameras"     type="int"    value="2"/>
 	  <param name="gen_scan"         type="bool"   value="false"/>
 
           <!-- When sending goals on /rtabmap/goal topic, use actionlib to communicate with move_base --> 
@@ -146,7 +132,6 @@
   	
 	  <remap from="rgbd_image0"     to="/d435_2/rgbd_image"/>
 	  <remap from="rgbd_image1"     to="/d435_3/rgbd_image"/>
-          <remap from="rgbd_image2"     to="/d435_4/rgbd_image"/>
 	  <remap from="scan" to="/scan"/>	
  	 
 	  <remap from="odom" to="$(arg odom_topic)"/>
