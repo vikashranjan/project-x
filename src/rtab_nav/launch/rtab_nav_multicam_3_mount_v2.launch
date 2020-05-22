@@ -2,18 +2,18 @@
 
   <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
     <arg name="camera" value="d435_2" />
-     <arg name="serial_no"         default="806312060532"/>
+     <arg name="serial_no"         default="801312071064"/>
   </include>
 
  <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
     <arg name="camera" value="d435_3" />
-     <arg name="serial_no"         default="851112061066"/>
+     <arg name="serial_no"         default="801212070782"/>
   </include>
 
  
   <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
     <arg name="camera" value="d435_4" />
-     <arg name="serial_no"         default="916512061256"/>
+     <arg name="serial_no"         default="826212070362"/>
   </include>
 
    <node name="ydlidar_node"  pkg="ydlidar"  type="ydlidar_node" output="screen" respawn="false" >
@@ -33,10 +33,10 @@
 
 
   <node pkg="tf" type="static_transform_publisher" name="base_to_d435_2_tf"
-      args="0.105 0 0.55 0 -0.87 0  base_link d435_2_link 20" />
+      args="0.105 0 0.55 0 -0.7 0  base_link d435_2_link 20" />
 
  <node pkg="tf" type="static_transform_publisher" name="base_to_d435_3_tf"
-      args="0.12 0 0.51 0 0 0  base_link d435_3_link 20" />
+      args="0.12 -0.002 0.51 0 0 0  base_link d435_3_link 20" />
 
 
  <node pkg="tf" type="static_transform_publisher" name="base_to_d435_4_tf"
