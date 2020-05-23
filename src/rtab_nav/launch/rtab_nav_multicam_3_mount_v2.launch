@@ -163,6 +163,9 @@
           <param name="Icp/MaxCorrespondenceDistance" type="string" value="0.1"/>
 	  <param name="RGBD/SavedLocalizationIgnored" type="string" value="true"/>
           <param name="Rtabmap/DetectionRate"        type="string" value="1"/>
+          <param name="RGBD/OptimizeStrategy" type="string" value="2"/> <!-- g2o=1, GTSAM=2 -->
+          <param name="RGBD/OptimizeRobust" type="string" value="true"/>
+          <param name="RGBD/OptimizeMaxError" type="string" value="0"/> <!-- should be 0 if RGBD/OptimizeRobust is true -->
 
 	  <!-- localization mode -->
 	  <param     if="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="false"/>
