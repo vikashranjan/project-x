@@ -17,7 +17,7 @@
   </include>
 
    <node name="ydlidar_node"  pkg="ydlidar"  type="ydlidar_node" output="screen" respawn="false" >
-    <param name="port"         type="string" value="/dev/ttyUSB1"/>  
+    <param name="port"         type="string" value="/dev/ttyUSB0"/>  
     <param name="frame_id"     type="string" value="laser_frame"/>
     <param name="resolution_fixed"    type="bool"   value="true"/>
     <param name="auto_reconnect"    type="bool"   value="true"/>
@@ -163,7 +163,7 @@
           <param name="Icp/MaxCorrespondenceDistance" type="string" value="0.1"/>
 	  <param name="RGBD/SavedLocalizationIgnored" type="string" value="true"/>
           <param name="Rtabmap/DetectionRate"        type="string" value="1"/>
-          <param name="RGBD/OptimizeStrategy" type="string" value="1"/> <!-- g2o=1, GTSAM=2 -->
+          <param name="RGBD/OptimizeStrategy" type="string" value="2"/> <!-- g2o=1, GTSAM=2 -->
           <param name="RGBD/OptimizeRobust" type="string" value="true"/>
           <param name="RGBD/OptimizeMaxError" type="string" value="0"/> <!-- should be 0 if RGBD/OptimizeRobust is true -->
 
