@@ -1,3 +1,0 @@
-<launch>
-    <remap from="/t265/odom/sample" to="odom" />
-</launch>

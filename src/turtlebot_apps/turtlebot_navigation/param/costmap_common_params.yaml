@@ -30,7 +30,7 @@ obstacle_layer:
     max_obstacle_height: 0.15
   d435_4:
     data_type: PointCloud2
-    topic: /d435_4/planner_cloud
+    topic: /d435_4/depth_registered/points
     sensor_frame: base_footprint
     marking: true
     clearing: true
@@ -53,7 +53,7 @@ obstacle_layer:
 inflation_layer:
   enabled:              true
   cost_scaling_factor:  5.0  # exponential rate at which the obstacle cost drops off (default: 10)
-  inflation_radius:     0.18  # max. distance from an obstacle at which costs are incurred for planning paths.
+  inflation_radius:     0.20  # max. distance from an obstacle at which costs are incurred for planning paths.
 
 static_layer:
   enabled:              true
