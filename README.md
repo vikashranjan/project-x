@@ -1,5 +1,7 @@
 
 # Mobile Robot Navigation
+This project implements rtabmap on Kobuki
+
 ON ROS Master
 
 roslaunch turtlebot_bringup minimal.launch
